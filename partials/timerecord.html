@@ -1,0 +1,52 @@
+<div class="container">
+<div class="row">   
+    <div class="col-md-home-12" style="background: #fff;padding:20px;">
+        <ul class="nav nav-tabs abstab">  
+            <li class="active"><a href="#">Time Correction</a> </li>   
+            <li><a href="#/timestatus">Time Status</a></li> 
+        </ul>  
+        <div class="tab-content">
+              <div class="tab-pane active" id="time-correction">
+                <h3>Time Correction</h3>
+                <div class="tablenav">
+                    <div class="tablenav-title">Beginning of the week</div>
+                    <div class="tablenav-select"><input class="form-control input" type="date" placeholder="date" ng-model="startdate" value={{startdate}} ng-change="updateList()"></div>
+                    <div class="tablenav-button">
+                        <a ng-click="AddTimeRec()" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus-sign modal-icon"></span> Add Time Record</a>
+                    </div>
+                </div>
+            
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="active">Type</th>
+                                <th class="active">Date</th>
+                                <th class="active" width="60">Status</th>
+                                <th class="active" width="210"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="rec in records">
+                            	
+                            	<td>{{rec.SUBTYTEXT}}</td>
+                            	<td>{{rec.BEGDA}}</td>
+                            	<td>
+        <span ng-if="rec.STATUS_TEXT=='informiert'" class="status-informed">{{rec.STATUS_TEXT}}</span>
+                                        <span ng-if="rec.STATUS_TEXT=='bestatigt'" class="status-confirmed">{{rec.STATUS_TEXT}}</span>
+                                             <span ng-if="rec.STATUS_TEXT=='abgelehnt'" class="status-denied">{{rec.STATUS_TEXT}}</span>
+                                </td>
+                            	<td>
+                                    <button type="button" class="btn btn-default-mini btn-delete" ng-click="remove($index)">x</button>
+                                    <button type="button" class="btn btn-default-mini btn-edit" ng-click="AddTimeRec('{{rec.REQUEST_ID}}')"><span class="glyphicon glyphicon-pencil modal-icon"></span> edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+	               </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

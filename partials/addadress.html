@@ -1,0 +1,52 @@
+<!-- container -->
+<div class="container">
+
+<div class="row">
+<!--ROW 1-->	
+	<div class="col-md-home-12" style="background: #fff;padding:20px;">
+								
+<h3>Adress</h3>
+		
+	<form role="form" style="margin-top:30px;">
+	  <div class="form-group">
+	    <label for="label-to">Valid from</label> 
+			<input class="form-control input-lg valid-from-to" type="date" placeholder="Date" ng-model="startdate" value="{{startdate}}">
+	    <label for="label-to" class="label-valid-to">Valid to</label> 
+			<input class="form-control input-lg valid-from-to" type="date" placeholder="Date" >
+			<div style="clear:both;"></div>
+	  </div>
+	
+	  <div class="form-group">
+	    <label for="label-type">c/o</label>
+			<input class="form-control input-lg width80" type="text" placeholder="..." ng-model="contry">
+	  </div>
+		
+	  <div class="form-group">
+	    <label for="label-from">Street</label>
+			<input class="form-control input-lg width80" type="text" placeholder="Street + House no" ng-model="street">
+	  </div>
+	
+	  <div class="form-group">
+	    <label for="label-from">City</label>
+			<div style="width:100%;">
+				<input class="form-control input-lg" type="text" placeholder="Postcode" style="float: left; width: 40%; margin-right: 1%;" ng-model="postcode">
+				<input class="form-control input-lg" type="text" placeholder="City" style="float: left; width: 39%;" ng-model="city">
+			</div>
+			<div style="clear:both;"></div>
+	  </div>
+		
+	  <div class="form-group">
+	    <label for="label-from">Phone</label>
+			<input class="form-control input-lg width80" type="text" placeholder="..." ng-model="phone">
+	  </div>
+		
+
+	  <div class="form-group">
+	  		<label for="label-until"></label>
+				<button type="submit" class="btn btn-style-2 width80">Save</button>
+		</div>
+	</form>
+							
+</div>
+<div style="clear:both;margin-bottom:50px;">
+<!-- /container -->

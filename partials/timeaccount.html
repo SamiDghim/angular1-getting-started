@@ -1,0 +1,45 @@
+<div class="container">
+<div class="row">
+    <div class="col-md-home-12" style="background: #fff;padding:20px;">
+        <ul class="nav nav-tabs abstab">  
+            <li ><a href="#/absencelist">Absence Application</a> </li>   
+            <li class="active"><a href="#">Time Account</a></li>  
+        </ul>  
+       <div class="tab-pane" id="time-accounts">
+            <h3>Time Accounts</h3>
+                <div class="tablenav">
+                    <div class="tablenav-button">
+                            <a ng-click="AddAbsence()"class="btn btn-default" role="button" style="padding:15px 12px;"><span class="glyphicon glyphicon-plus-sign modal-icon"></span> Add Absence Time</a>
+                    </div>
+                </div>  
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="active vertical-top">Type</th>
+                                <th class="active vertical-top">Deadline</th>
+                                <th class="active">Claim<br/><span class="font-normal">in day(s)</span></th>
+                                <th class="active">Used<br/><span class="font-normal">in day(s)</span></th>
+                                <th class="active">Planned<br/><span class="font-normal">in day(s)</span></th>
+                                <th class="active">Available<br/><span class="font-normal">in day(s)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="account in accounts">
+                            	
+                            	<td>{{account.TIME_TYPE_TEXT}}</td>
+                            	<td>{{account.DEDUCT_END}}</td>
+                            	<td>{{account.ENTITLE}}</td>
+                            	<td>{{account.DEDUCATED_REDUCED}}</td>
+                            	<td>{{account.DEDUCTED_REDUCED_FUT_REQUESTED}}</td>
+                            	<td>{{account.REST_POSTED_REQUESTED}}</td>
+                            	
+                            </tr>
+                        </tbody>
+        	   </table>
+        </div>
+        </div>
+    </div>
+</div>
+</div>

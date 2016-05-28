@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" ng-app="kioskapp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employees Self Services</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/loginController.js"></script>
+  <script src="js/controllers/mainmenuController.js"></script>
+  <script src="js/controllers/applicationController.js"></script>
+  <script src="js/services/AccessService.js"></script>
+  <script src="js/services/ApplicationService.js"></script>
+
+
+<body>
+ <div class="navbar navbar-style navbar-fixed-top" role="navigation" ng-controller="NavController">
+  <div class="container" ng-if="!loggedin">
+
+      <div class="navbar-title only-title">
+          <div class="navbar-title-txt">Employee Self Service</div>
+      </div>
+
+
+    </div>
+    <div class="container" ng-if="loggedin">
+      <div class="navbar-dropdown">
+        <div class="btn-group floatLeft">
+          <button type="button" class="dropdown-button navbar-dropdown-style" data-toggle="dropdown" >
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+          </button>
+
+          <ul class="dropdown-menu">
+            <li class="active">
+              <a href="#/menu">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-home"></span></div>
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a href="#/search">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-search"></span></div>
+                Search
+              </a>
+            </li>
+
+            <li>
+              <a href="" data-toggle="modal" data-target="#mailbox">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-envelope"></span></div>
+                Mailbox
+              </a>
+            </li>
+
+            <li>
+              <a href="" data-toggle="modal" data-target="#application">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-flag"></span></div>
+                Application
+              </a>
+            </li>
+
+            <li>
+              <a href="" data-toggle="modal" data-target="#timerecord">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-time"></span></div>
+                Time Record
+              </a>
+            </li>
+
+            <li>
+              <a href="#/certification">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-list-alt"></span></div>
+                Certification
+              </a>
+            </li>
+
+            <li>
+              <a href="#/payment">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-euro"></span></div>
+                Payment
+              </a>
+            </li>
+
+            <li>
+              <a href="" data-toggle="modal" data-target="#account">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-user"></span></div>
+                Account
+              </a>
+            </li>
+
+            <li>
+              <a href="#/services">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-info-sign"></span></div>
+                Service
+              </a>
+            </li>
+
+            <li class="dropdown-header">
+              {{userFirstName}} {{userLastName}}<br>Personal-Nr.: {{userID}}
+            </li>
+
+            <li>
+              <a ng-click="loggout()">
+                <div class="dropdown-icons"><span class="glyphicon glyphicon-off"></span></div>
+                Logout
+              </a>
+            </li>
+
+          </ul>
+          </div>
+      </div>
+
+      <div class="navbar-back-button" >
+          <a href="javascript:history.back()" class="btn-default-style btn-style-1">back</a>
+      </div>
+
+      <div class="navbar-title">
+          <div class="navbar-title-txt">{{pagename}}</div>
+      </div>
+
+      <div class="navbar-logout" >
+          <a ng-click="loggout()" class="btn-default-style btn-style-1">&nbsp;&nbsp;Logout&nbsp;&nbsp;</a>
+      </div>
+
+      <div class="navbar-personal" >
+        <div class="navbar-personal-icon">
+          <span class="glyphicon glyphicon-user"></span>
+        </div>
+        <div class="navbar-personal-txt">
+            <b>{{userFirstName}} {{userLastName}}</b><br/>
+            Personal-Nr.: {{userID}}
+        </div>
+
+      </div>
+    </div>
+</div>
+<!-- /fixed navbar -->
+ <div ng-view>
+ </div>
+ <!-- !!MODAL!! -->
+<!-- Modal: Mailbox -->
+<div class="modal fade" id="mailbox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="modal-header-title">
+            <span class="glyphicon glyphicon-envelope modal-icon"></span>
+            <span class="modal-title" id="myModalLabel">Mailbox</span>
+          </div>
+          <div style="position: absolute; right: 40px; margin-right: -20px; margin-top: -5px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>
+
+          </div>
+          <div class="modal-body">
+            <a href="#/inbox" class="btn btn-style-2 mailbtn" role="button" >Inbox</a>
+            <a href="#/outbox" class="btn btn-style-2 mailbtn" role="button" >Outbox</a>
+          </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal: Application -->
+<div class="modal fade" id="application" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="modal-header-title">
+            <span class="glyphicon glyphicon-flag modal-icon"></span>
+            <span class="modal-title" id="myModalLabel">Application</span>
+          </div>
+          <div style="position: absolute; right: 40px; margin-right: -20px; margin-top: -5px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>
+
+          </div>
+          <div class="modal-body">
+            <a href="#/absencelist" class="btn btn-style-2 appbtn" role="button" >Absence Application</a>
+            <a href="#/timeaccount" class="btn btn-style-2 appbtn" role="button">Time Accounts</a>
+          </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal: Time Record -->
+<div class="modal fade" id="timerecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="modal-header-title">
+            <span class="glyphicon glyphicon-time modal-icon"></span>
+            <span class="modal-title" id="myModalLabel">Time Record</span>
+          </div>
+          <div style="position: absolute; right: 40px; margin-right: -20px; margin-top: -5px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>
+
+          </div>
+          <div class="modal-body">
+            <a href="#/timerecords" class="btn btn-style-2 timerecbtn" role="button" >Time Correction</a>
+            <a href="#/timestatus" class="btn btn-style-2 timerecbtn" role="button">Time Status</a>
+          </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Modal: Account -->
+<div class="modal fade" id="account" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="modal-header-title">
+            <span class="glyphicon glyphicon-user modal-icon"></span>
+            <span class="modal-title" id="myModalLabel">Account</span>
+          </div>
+          <div style="position: absolute; right: 40px; margin-right: -20px; margin-top: -5px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>
+
+          </div>
+          <div class="modal-body">
+            <a href="#/accountaddress" class="btn btn-style-2 accbtn" role="button">Address</a>
+            <a href="#/accountbank" class="btn btn-style-2 accbtn" role="button">Bank Account</a>
+            <a href="#/accounttravel" class="btn btn-style-2 accbtn" role="button">Bank Account for Travel Expenses</a>
+          </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- !!END-MODAL!! -->
+
+
+<script>
+$(document).ready(function() {
+var hash = window.location.hash;
+hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+$('.mailbtn').click(function() {
+    $('#mailbox').modal('hide');
+});
+$('.appbtn').click(function() {
+    $('#application').modal('hide');
+});
+$('.timerecbtn').click(function() {
+    $('#timerecord').modal('hide');
+});
+$('.accbtn').click(function() {
+    $('#account').modal('hide');
+});
+$('.nav-tabs a').click(function (e) {
+  $(this).tab('show');
+  var scrollmem = $('body').scrollTop();
+  window.location.hash = this.hash;
+  $('html,body').scrollTop(scrollmem);
+});
+});
+</script>
+
+
+
+</body>
+</html>
